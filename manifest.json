@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "New Tab Clock & Animation",
+  "version": "1.0",
+  "description": "Shows a digital clock and beautiful animation in new tab.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [],
+  "action": {
+    "default_title": "Clock New Tab"
+  }
+}

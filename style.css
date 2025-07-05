@@ -1,0 +1,280 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+  font-family: "Courier New", monospace;
+  overflow: hidden;
+}
+
+/* Full-page background canvas */
+#backgroundCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Foreground content */
+.main-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Left Clock */
+.clock-wrapper {
+  flex: 1;
+  display: flex;
+  margin-top: 150px;
+  justify-content: center;
+  align-items: center;
+}
+
+#clock {
+  display: flex;
+  gap: 20px;
+  padding: 40px 50px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* DIGIT STYLING */
+.digit {
+  position: relative;
+  width: 40px;
+  height: 70px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.segment {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 3px;
+  transition: all 0.9s ease-in-out;
+  opacity: 0.3;
+  transform: scale(0.95);
+}
+
+.segment.on {
+  background-color: #000000;
+  box-shadow: 0 0 5px #645c5c, 0 0 20px #ccc0c0;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ****************************************************************************************** */
+/* ****************************************************************************************** */
+
+/* ****************************************************************************************** */
+/* ****************************************************************************************** */
+.search-container {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  text-align: center;
+}
+
+.search-box {
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.search-box input {
+  width: 60%;
+  padding: 14px 20px;
+  font-size: 18px;
+  border: 2px solid #000000;
+  border-radius: 25px;
+  outline: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-box input:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+}
+
+.search-box label {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #888;
+  pointer-events: none;
+  transition: 0.3s ease;
+  background: white;
+  padding: 0 6px;
+}
+
+.search-box input:focus + label,
+.search-box input:not(:placeholder-shown) + label {
+  top: -1px;
+  left: 25%;
+  font-size: 14px;
+  border: 1px solid #1a73e8;
+  /* border-top-right-radius: 12px; */
+  /* border-bottom-left-radius: 12px; */
+  border-radius: 12px;
+  color: #1a73e8;
+}
+/* Segment positions */
+.seg-a {
+  top: 0;
+  left: 8px;
+  width: 24px;
+  height: 6px;
+}
+.seg-b {
+  top: 4px;
+  right: 0;
+  width: 6px;
+  height: 28px;
+}
+.seg-c {
+  bottom: 4px;
+  right: 0;
+  width: 6px;
+  height: 28px;
+}
+.seg-d {
+  bottom: 0;
+  left: 8px;
+  width: 24px;
+  height: 6px;
+}
+.seg-e {
+  bottom: 4px;
+  left: 0;
+  width: 6px;
+  height: 28px;
+}
+.seg-f {
+  top: 4px;
+  left: 0;
+  width: 6px;
+  height: 28px;
+}
+.seg-g {
+  top: 32px;
+  left: 8px;
+  width: 24px;
+  height: 6px;
+}
+
+/* Colon styling */
+.colon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 70px;
+  width: 10px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+/* Right Side */
+.right-animation {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animation-box {
+  width: 80%;
+  height: 80%;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.85);
+  /* box-shadow: 0 0 25px rgba(0, 0, 0, 0.1); */
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .container {
+  background: linear-gradient(to bottom, #0c969c, #0a7075, #032f30);
+} */
+
+.loading-page {
+  /* position: fixed; */
+  top: -30px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#svg {
+  height: 350px;
+  width: 350px;
+  stroke: #000000;
+  fill-opacity: 0;
+  stroke-width: 3px;
+  stroke-dasharray: 4500;
+  animation: draw 10s ease-in-out infinite;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 4500;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: 4500;
+  }
+}
+
+.logo-name {
+  /* display: none; */
+  color: white;
+  font-size: 0.8rem;
+  top: -20px;
+  font-family: "EB Garamond";
+  font-weight: 600;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
